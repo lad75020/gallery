@@ -1,0 +1,3 @@
+User-agent: Googlebot
+
+Sitemap: http://www.gaymen.pictures/sitemap.xml
