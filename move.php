@@ -17,13 +17,13 @@ if ($path != "" && $pwd == "1124"){
 		case ".JPEG":
 		case ".png":
 		case ".PNG":
-			shell_exec("cwebp -q 100 -z 9 -resize 0 400 -lossless /var/www/gallery/uploads/".$path." -o /var/www/gallery/XXX2/".$path.".webp");
+			shell_exec("cwebp -q 100 -z 9 -resize 0 400 -lossless /var/www/gallery/uploads/".$path." -o /var/www/XXX/".$path.".webp");
 			unlink('/var/www/gallery/uploads/'.$path);
 			$mysqli->query("INSERT INTO records VALUES('{$path}.webp',0,0);");
 			break;
 		case ".webp":
 		case ".WEBP":
-			shell_exec('mv /var/www/gallery/uploads/'.$path.' /var/www/gallery/XXX2/'.$path);
+			shell_exec('mv /var/www/gallery/uploads/'.$path.' /var/www/XXX/'.$path);
 			$mysqli->query("INSERT INTO records VALUES('{$path}',0,0);");
 			break;
 		}
