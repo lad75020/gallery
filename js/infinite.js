@@ -18,10 +18,12 @@ var whereIs="";
 
 if (localStorage.getItem("favorites") == null)
     localStorage.setItem("favorites", "");
-    if (localStorage.getItem("dislikes") == null)
+if (localStorage.getItem("dislikes") == null)
     localStorage.setItem("dislikes", "");
 if (localStorage.getItem("GRPD") == null)
     localStorage.setItem("GRPD", 0);
+if (localStorage.getItem("theme") == null)
+    localStorage.setItem("theme", "dark");
 
 function getImageFileList(){
 xmlhttp2 = new XMLHttpRequest();
@@ -62,6 +64,17 @@ function setRecord(like, fileName){
     xmlhttp4.open("POST", "setRecord.php",true);
     xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xmlhttp4.send("like="+like+"&filename="+fileName);
+}
+function toggleTheme(){
+    if (localStorage.getItem("theme")=="dark"){
+
+        document.body.style.backgroundColor = "white";
+        localStorage.setItem("theme", "bright");
+    }
+    else if (localStorage.getItem("theme")=="bright"){
+        document.body.style.backgroundColor = "black";
+        localStorage.setItem("theme", "dark");
+    }
 }
 function addOption(oSelect, sText, sValue){
     var oOption = document.createElement("option");
@@ -116,16 +129,10 @@ function cleanAll() {
 
 function showAll() {
     document.getElementById('fav').style.display = 'block';
+    document.getElementById('sun').style.display = 'block';
     document.getElementById('btnUpload').style.display = 'block';
     if(!isPhone)
         document.getElementById("videolink").style.display = "block";
-    
-	if (document.getElementById('bmb') !=undefined)
-    	document.getElementById('bmb').style.visibility = 'visible';
-	if (document.getElementById('gan') !=undefined)
-    	document.getElementById('gan').style.display = 'block';
-	if (document.getElementById('plublogs') != undefined)
-    document.getElementById('plublogs').style.visibility = 'visible';
 	if (document.getElementById('Loading') != undefined)
     document.getElementById('Loading').style.visibility = 'visible';
 	if (document.getElementById('tools') != undefined)

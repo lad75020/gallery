@@ -51,9 +51,8 @@
 <!-- End Matomo Code -->
 </head>
 
-<body onload="getImageFileList();getVideoFileList();drawOn = setInterval(scrolling, 250);if(localStorage.getItem('is18')!='1') document.getElementById('btnOpen').click(); else {showAll();document.getElementById('container').style.visibility='visible';}">
-    <div id="bmb" data-toggle="tooltip" title="Click here to upvote this site!" style="visibility:hidden">
-    </div>
+<body onload="getImageFileList();getVideoFileList();if(localStorage.getItem('theme') =='dark') document.body.style.backgroundColor = 'black';if(localStorage.getItem('theme') =='bright') document.body.style.backgroundColor = 'white';drawOn = setInterval(scrolling, 250);if(localStorage.getItem('is18')!='1') document.getElementById('btnOpen').click(); else {showAll();document.getElementById('container').style.visibility='visible';}">
+
 	<div id="videolink" title="Watch videos" style="text-align:center;color:red;font-size:36pt;font-weight:bold;display:none">
 		<a href="#" onclick="displayVideos();"> New ! Videos</a>
 	</div>
@@ -105,9 +104,10 @@
 	</div>
 
 	<div id="tools" style="visibility:hidden">
-		<div id="btnUpload" onmouseover="this.style.cursor='pointer'" onclick="_paq.push(['trackEvent', 'Click', 'Use', 'UploadPhoto', 1]);document.getElementById('drop_file_zone').style.display = 'block';" data-toggle="tooltip" title="Send me photos!"><i class="material-icons">&#xe8fc;</i></div>
+		<div id="btnUpload" onmouseover="this.style.cursor='pointer'" onclick="_paq.push(['trackEvent', 'Click', 'Use', 'UploadPhoto', 1]);document.getElementById('drop_file_zone').style.display = 'block';" title="Send me photos!"><i class="material-icons">&#xe8fc;</i></div>
 		<div id="fav" onmouseover="this.style.cursor='pointer'" onclick="showFavorites(this); _paq.push(['trackEvent', 'Click', 'Use', 'Favorites', 1]);" title="Click here to display your favorite photos"><span class="material-icons">&#xe87d;</span></div>
-		<div id="clear" onmouseover="this.style.cursor='pointer'" onclick="localStorage.setItem('favorites', ''); showFavorites(document.getElementById('fav'));_paq.push(['trackEvent', 'Click', 'Use', 'ClearFavorites', 1]);" data-toggle="tooltip" title="Click here to clear your favorites">&#10060;</div>
+		<div id="clear" onmouseover="this.style.cursor='pointer'" onclick="localStorage.setItem('favorites', ''); showFavorites(document.getElementById('fav'));_paq.push(['trackEvent', 'Click', 'Use', 'ClearFavorites', 1]);" title="Click here to clear your favorites">&#10060;</div>
+		<div id="sun" onmouseover="this.style.cursor='pointer'" title="Click to change theme dark/bright" onclick="toggleTheme()">&#9728;</div>
 	</div>
 	<div id="GRPD">
 		This site uses cookies to track traffic and site usage but does not store personal information. By clicking <span style="font-size:24pt"><a href="#" onclick="clickGRPD();">&#128077;</a></span>, you agree to these terms.
