@@ -200,22 +200,28 @@ function putImages() {
             if(!localStorage.getItem("dislikes").split(";").includes(files[imageID])){
                 oDiv = document.createElement("div");
                 oDivX = document.createElement("div");
+                oDivHeart = document.createElement("div");
                 oDivX.setAttribute("onclick", "document.getElementById('ID"+imageID+"').firstChild.style.borderColor='red';setTimeout(hidePix,1000,"+ imageID +");addDislike('"+ files[imageID] +"');");
                 oDivX.setAttribute("class","closeX");
-                oDivX.setAttribute("title","Click on X to definitely hide this picture.");
+                oDivX.setAttribute("title","Click on X to definitely hide this photo.");
                 oDivX.innerHTML = "X";
+                oDivHeart.setAttribute("class","heart");
+                oDivHeart.setAttribute("title","Click to keep this photo as favorite.");
+                oDivHeart.setAttribute("onclick", "addFavorite(document.getElementById('ID"+imageID+"').firstChild);");
+                oDivHeart.innerHTML = "&#9825;";
                 oImg = document.createElement("img");
                 oDiv.setAttribute("id" , "ID" + imageID);
                 oDiv.setAttribute("class" , "image");
                 oDiv.setAttribute("onmouseover","whereIs = 'ID" +imageID+"';")
                 oImg.setAttribute("alt" , "Image Number " + imageID);
                 oImg.setAttribute("height" , imageHeight);
-                oImg.setAttribute("data-toggle", "tooltip");
-                oImg.setAttribute("title" , "Click on photo to keep it as favorite.");
+                //oImg.setAttribute("data-toggle", "tooltip");
+                oImg.setAttribute("title" , "Click on photo to enlarge.");
                 oImg.setAttribute("src", "XXX2/" + files[imageID]);
-                oImg.setAttribute("onclick", "overlayOn(this);addFavorite(this);");
+                oImg.setAttribute("onclick", "overlayOn(this);");
                 oDiv.appendChild(oImg);
                 oDiv.appendChild(oDivX);
+                oDiv.appendChild(oDivHeart);
                 document.getElementById("container").appendChild(oDiv);
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID])){
                     document.getElementById("ID"+imageID).firstChild.style.borderColor="green";

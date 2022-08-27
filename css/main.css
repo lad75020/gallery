@@ -222,10 +222,19 @@ img:hover {
     right:20px;
     top:10px;
     z-index:200;
+    font-size:18px;
     font-weight:bolder;
     cursor:pointer
 }
-
+.heart {
+    position:absolute;
+    right:50px;
+    top:5px;
+    z-index:200;
+    font-size:24px;
+    font-weight:bolder;
+    cursor:pointer
+}
 html {
     scroll-behavior: smooth;
 }
