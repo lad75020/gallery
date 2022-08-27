@@ -94,6 +94,8 @@ function addFavorite(image) {
         localStorage.setItem("favorites", fileName + ";");
     setRecord("yes",fileName);
     image.style.borderColor="green";
+    image.parentElement.children[2].style.display ='none';
+    image.parentElement.children[1].style.display ='none';
 
 }
 function addDislike(imageFileName) {
@@ -220,9 +222,13 @@ function putImages() {
                 oImg.setAttribute("title" , "Click on photo to enlarge.");
                 oImg.setAttribute("src", "XXX2/" + files[imageID]);
                 oImg.setAttribute("onclick", "overlayOn(this);");
+                if (localStorage.getItem("favorites").split(";").includes(files[imageID]))
+                    oImg.style.borderColor="green";
                 oDiv.appendChild(oImg);
-                oDiv.appendChild(oDivX);
-                oDiv.appendChild(oDivHeart);
+                if(!localStorage.getItem("favorites").split(";").includes(files[imageID])){
+                    oDiv.appendChild(oDivX);
+                    oDiv.appendChild(oDivHeart);
+                }
                 document.getElementById("container").appendChild(oDiv);
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID])){
                     document.getElementById("ID"+imageID).firstChild.style.borderColor="green";
