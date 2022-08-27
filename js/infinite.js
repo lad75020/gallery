@@ -59,8 +59,9 @@ function setRecord(like, fileName){
             return;
         }
     };
-    xmlhttp4.open("GET", "setRecord.php?like="+like+"&filename="+fileName,true);
-    xmlhttp4.send();
+    xmlhttp4.open("POST", "setRecord.php",true);
+    xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp4.send("like="+like+"&filename="+fileName);
 }
 function addOption(oSelect, sText, sValue){
     var oOption = document.createElement("option");
