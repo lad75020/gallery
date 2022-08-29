@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <script>
+        function showImg(oTD){
+            let oImg = document.createElement("IMG");
+            oImg.setAttribute("src", "XXX2/"+oTD.innerText);
+            
+            if(document.getElementById("viewer")){
+                document.getElementById("viewer").replaceChild(oImg, document.getElementById("viewer").firstChild);
+                document.getElementById("viewer").style.display='block';
+            }
+            else{
+                let oDiv = document.createElement("DIV");
+                oDiv.setAttribute("style", "z-index:500;position:fixed;display:block;top:10px;left:200px;cursor:pointer");
+                oDiv.setAttribute("onclick","this.style.display='none'");
+                oDiv.setAttribute("id","viewer");
+                oDiv.appendChild(oImg);
+                document.body.appendChild(oDiv);
+            }       
+        }
+
+        function  deleteFile(filename, oTR2){
+            xmlhttp4 = new XMLHttpRequest();
+            xmlhttp4.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    oTR2.outerHTML = "";
+                    return;
+            }
+            };
+            xmlhttp4.open("POST", "deleteFile.php",true);
+            xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlhttp4.send("filename="+filename+"&pwd="+document.getElementById("pwd").value);
+        }
+        var rowNum=0;
+        function drawTable(){
+            xmlhttp= new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var recordArray = JSON.parse(this.responseText);
+                    rowNum = recordArray.length;
+                    var oTable = document.createElement("TABLE");
+                    oTable.style.border="thick solid #00FF00";
+                    for (let i=0; i<recordArray.length;i++){
+                        let sRow = recordArray[i];
+                        let oTR = document.createElement("TR");
+                        let ofilenameTD = document.createElement("TD");
+                        let olikesTD = document.createElement("TD");
+                        let odislikesTD = document.createElement("TD");
+                        let odeleteTD = document.createElement("TD");
+                        ofilenameTD.innerText = sRow[0];
+                        ofilenameTD.style.border="thin solid #0000FF";
+                        ofilenameTD.setAttribute("onmouseover", "showImg(this);");
+                        ofilenameTD.setAttribute("onmouseout", "document.getElementById('viewer').style.display='none';");
+                        olikesTD.style.border="thin solid #0000FF";
+                        odislikesTD.style.border="thin solid #0000FF";
+                        olikesTD.innerText = sRow[1];
+                        odislikesTD.innerText = sRow[2];
+                        odeleteTD.style.border = "thin solid #000000";
+                        odeleteTD.setAttribute("style","border:thin solid #000000;color:red");
+                        odeleteTD.setAttribute("onclick","deleteFile('"+sRow[0]+"', this.parentElement);");
+                        odeleteTD.innerText  = "X";
+                        oTR.appendChild(ofilenameTD);
+                        oTR.appendChild(olikesTD);
+                        oTR.appendChild(odislikesTD);
+                        oTR.appendChild(odeleteTD);
+                        oTR.style.border = "thin solid #FF0000";
+                        oTable.appendChild(oTR);
+                    }
+                    document.getElementById('main').appendChild( oTable);
+                }
+            };
+            xmlhttp.open("GET", "getRecords.php",true);
+            xmlhttp.send();           
+        }
+
+    
+    
+    </script>
+</head>
+<body onload="drawTable();">
+    <input type="password" id="pwd"></input>
+    <div id="main"></div>
+</body>
+</html>
