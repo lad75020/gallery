@@ -170,7 +170,7 @@ function showFavorites(oFavDiv) {
             var oDiv = document.createElement("DIV");
             var oImg = document.createElement("IMG");
             oImg.setAttribute("height","400px");
-            oImg.setAttribute("data-toggle","tooltip");
+            oImg.setAttribute("onclick","overlayOn(this);");
             oImg.setAttribute("src","XXX2/"+favorites[j]);
             oDiv.appendChild(oImg);
             document.getElementById("container").appendChild(oDiv);

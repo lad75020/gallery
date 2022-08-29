@@ -32,9 +32,7 @@ echo "-> Test finished in $deltat seconds. Your speed is ". round($kb / $deltat,
 };
 xmlhttp2.open("GET", "http://raspberrypi.dubertrand.corp/etat-serveur",true);
 xmlhttp2.send();
-    
-
-    
+      
     document.write("<br/> Width = " + screen.availWidth + "<br/> Height = " + screen.availHeight+"<br/>");
 </script>
 <?php phpinfo(); ?>

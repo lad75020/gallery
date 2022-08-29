@@ -20,10 +20,26 @@
                 document.body.appendChild(oDiv);
             }       
         }
+
+        function  deleteFile(filename){
+            xmlhttp4 = new XMLHttpRequest();
+            xmlhttp4.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    return;
+            }
+            };
+            xmlhttp4.open("POST", "deleteFile.php",true);
+            xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlhttp4.send("filename="+filename+"&pwd="+document.getElementById("pwd").value);
+
+        }
+
 <?php
 $mysqli = new mysqli("localhost", "laurent", "1124Da", "gallery");
 $result = $mysqli->query("SELECT filename, likes, dislikes FROM records WHERE likes >0 OR dislikes >0 ORDER BY likes DESC, dislikes DESC;");
 $jsarray = json_encode($result->fetch_all());
+echo("var rowNum=".$result->num_rows.";");
 echo("var recordArray = JSON.parse('".$jsarray."');\n");
 
 $mysqli->close();
@@ -36,6 +52,7 @@ $mysqli->close();
         let ofilenameTD = document.createElement("TD");
         let olikesTD = document.createElement("TD");
         let odislikesTD = document.createElement("TD");
+        let odeleteTD = document.createElement("TD");
         ofilenameTD.innerText = sRow[0];
         ofilenameTD.style.border="thin solid #0000FF";
         ofilenameTD.setAttribute("onmouseover", "showImg(this);");
@@ -44,16 +61,22 @@ $mysqli->close();
         odislikesTD.style.border="thin solid #0000FF";
         olikesTD.innerText = sRow[1];
         odislikesTD.innerText = sRow[2];
+        odeleteTD.style.border = "thin solid #000000";
+        odeleteTD.setAttribute("style","border:thin solid #000000;color:red");
+        odeleteTD.setAttribute("onclick","deleteFile('"+sRow[0]+"');this.parentElement.outerHTML='';");
+        odeleteTD.innerText  = "X";
         oTR.appendChild(ofilenameTD);
         oTR.appendChild(olikesTD);
         oTR.appendChild(odislikesTD);
+        oTR.appendChild(odeleteTD);
         oTR.style.border = "thin solid #FF0000";
         oTable.appendChild(oTR);
     }
     
     </script>
 </head>
-<body onload="document.getElementById('main').appendChild( oTable);">
+<body onload="document.getElementById('main').appendChild( oTable);alert(rowNum);">
+    <input type="password" id="pwd"></input>
     <div id="main"></div>
 </body>
 </html>

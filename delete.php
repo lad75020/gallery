@@ -2,10 +2,8 @@
 $path = isset($_REQUEST["path"])?$_REQUEST["path"]:"";
 $pwd = isset($_REQUEST["pwd"])?$_REQUEST["pwd"]:"";
 
-if ($pwd == "1124" && $path != ""){
-	if(unlink("/var/www/gallery/uploads/".$path))
-		return("Succès");
-	else
-		return("Echec");
+if ($pwd == "1124D@1125#" && $path != ""){
+	shell_exec("rm /var/www/gallery/uploads/".$path);
+
 }
 ?>
