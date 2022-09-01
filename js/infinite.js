@@ -193,7 +193,18 @@ function showFavorites(oFavDiv) {
         favMode = false;
     }
 }
-
+function  deleteFile(filename){
+    xmlhttp5 = new XMLHttpRequest();
+    xmlhttp5.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert("File deleted");
+            return;
+    }
+    };
+    xmlhttp5.open("POST", "deleteFile.php",true);
+    xmlhttp5.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp5.send("filename="+filename+"&pwd="+localStorage.getItem("password"));
+}
 function putImages() {
 
     $('.toast').toast({ delay: 1500 });
@@ -211,6 +222,7 @@ function putImages() {
                 oDiv = document.createElement("div");
                 oDivX = document.createElement("div");
                 oDivHeart = document.createElement("div");
+                
                 oDivX.setAttribute("onclick", "document.getElementById('ID"+imageID+"').firstChild.style.borderColor='red';setTimeout(hidePix,1000,"+ imageID +");addDislike('"+ files[imageID] +"');");
                 oDivX.setAttribute("class","closeX");
                 oDivX.setAttribute("title","Click on X to definitely hide this photo.");
@@ -219,6 +231,7 @@ function putImages() {
                 oDivHeart.setAttribute("title","Click to keep this photo as favorite.");
                 oDivHeart.setAttribute("onclick", "addFavorite(document.getElementById('ID"+imageID+"').firstChild);");
                 oDivHeart.innerHTML = "&#9825;";
+
                 oImg = document.createElement("img");
                 oDiv.setAttribute("id" , "ID" + imageID);
                 oDiv.setAttribute("class" , "image");
@@ -235,6 +248,15 @@ function putImages() {
                 if(!localStorage.getItem("favorites").split(";").includes(files[imageID])){
                     oDiv.appendChild(oDivX);
                     oDiv.appendChild(oDivHeart);
+                }
+                if(localStorage.getItem("password") != "" && localStorage.getItem("password")!=null)
+                {
+                    oDivDelete = document.createElement("div");
+                    oDivDelete.setAttribute("class","flagDelete");
+                    oDivDelete.setAttribute("title","Click to delete on disk.");
+                    oDivDelete.setAttribute("onclick", "document.getElementById('ID"+imageID+"').firstChild.style.borderColor='red';setTimeout(hidePix,1000,"+ imageID +");deleteFile(document.getElementById('ID"+imageID+"').firstChild.src.split('/').pop());");
+                    oDivDelete.innerHTML = "&#128681";
+                    oDiv.appendChild(oDivDelete);
                 }
                 document.getElementById("container").appendChild(oDiv);
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID])){
@@ -299,10 +321,6 @@ function file_explorer() {
     };
 }
 
-function hideMessage() {
-    document.getElementById("uploadMessage").style.display = "none";
-}
-
 function ajax_file_upload(file_obj) {
     if (file_obj != undefined) {
         var form_data = new FormData();
@@ -314,11 +332,7 @@ function ajax_file_upload(file_obj) {
             processData: false,
             data: form_data,
             success: function(response) {
-                document.getElementById("uploadMessage").innerText = response;
-                
-                document.getElementById("uploadMessage").style.display = "block";
 				_paq.push(['trackEvent', 'Upload', 'Photo', 1, 1]);
-                setTimeout(hideMessage, 4500);
                 document.getElementById("drop_file_zone").style.display = 'none';
                 $('#selectfile').val('');
             }

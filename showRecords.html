@@ -33,13 +33,11 @@
             xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xmlhttp4.send("filename="+filename+"&pwd="+document.getElementById("pwd").value);
         }
-        var rowNum=0;
         function drawTable(){
             xmlhttp= new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var recordArray = JSON.parse(this.responseText);
-                    rowNum = recordArray.length;
                     var oTable = document.createElement("TABLE");
                     oTable.style.border="thick solid #00FF00";
                     for (let i=0; i<recordArray.length;i++){
