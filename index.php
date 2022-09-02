@@ -104,11 +104,11 @@ if($pwd == "1124Da1125Db")
     <div id="overlay" onclick="overlayOff();"><span id ="temp"></span></div>
 	<div id="theater">
 		<div style="z-index:500">
-            <select name="Movie" id ="movie" onchange="if(this.options[0].value == 'BLANK') this.remove(0);_paq.push(['trackEvent', 'View', 'Video', this.options[this.selectedIndex].text] );if (this.options[this.selectedIndex].value=='CLOSE_NOW') {displayVideos();document.getElementById('player').pause();} else if (this.options[this.selectedIndex].value=='BLANK') {return;} else document.getElementById('player').src='videos/' + this.options[this.selectedIndex].value;">
+            <select name="Movie" id ="movie" onchange="if(this.options[0].value == 'BLANK') this.remove(0);_paq.push(['trackEvent', 'View', 'Video', this.options[this.selectedIndex].text] );if (this.options[this.selectedIndex].value=='CLOSE_NOW') {displayVideos();document.getElementById('player').pause();} else if (this.options[this.selectedIndex].value=='BLANK') {return;} else document.getElementById('player').src='http://raspberrypi.dubertrand.corp/getVideo.php?filename=' + encodeURI(this.options[this.selectedIndex].value)">
             </select>
         </div>
         <div style="z-index:500">
-            <video id="player"  controls autoplay></video>
+            <video id="player"  controls autoplay preload="auto"></video>
         </div>
 	</div>
 
