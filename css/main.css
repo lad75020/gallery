@@ -147,6 +147,7 @@ img:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 10px;
     border-radius: 5px;
+    z-index:300;
 
 }
 #fav {
@@ -159,6 +160,7 @@ img:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 10px;
     border-radius: 5px;
+    z-index:300;
 	display:none;
 }
 
@@ -172,6 +174,7 @@ img:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 10px;
     border-radius: 5px;
+    z-index:300;
 	display:none;
 }
 
@@ -184,6 +187,7 @@ img:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 10px;
     border-radius: 5px;
+    z-index:300;
 }
 #uploadMessage{
     font-size: 18pt;

@@ -18,7 +18,6 @@
 	<script>
 		var isPhone = false;
 		var imageHeight = "";
-	</script>
 <?php 
 	require("config.inc.php");
     $is18= isset($_GET["is18"])? true:false;
@@ -26,33 +25,31 @@
 	$browser = get_browser($_SERVER['HTTP_USER_AGENT'],true);
 	$isMobile = $browser["ismobiledevice"] == 1;
 	if( $isMobile) {?>
-	<script>
+
 		imageHeight = "300px";isPhone = true;
-	</script>
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" async>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js" async></script>
+
 <?php } else { ?>
-	<script>
+
 		isPhone = false;
 		imageHeight = "400px";
-	</script>
+
 <?php } 
 if($pwd == "1124Da1125Db")
 {
 	?>
-	<script>
-		localStorage.setItem("password", __ADMIN_PASSWORD__);
-	</script>
+
+		localStorage.setItem("password", "<?php echo(__ADMIN_PASSWORD__); ?>");
+
 	<?php
 }
 else{
 	?>
-	<script>
+
 		localStorage.setItem("password", "");
-	</script>
+
 	<?php	
 }
-?>
+?>	</script>
 	 <script src="js/infinite.js" defer></script>   
 
 <!-- Matomo -->
@@ -125,6 +122,7 @@ else{
 		<div id="fav" onmouseover="this.style.cursor='pointer'" onclick="showFavorites(this); _paq.push(['trackEvent', 'Click', 'Use', 'Favorites', 1]);" title="Click here to display your favorite photos"><span class="material-icons">&#xe87d;</span></div>
 		<div id="clear" onmouseover="this.style.cursor='pointer'" onclick="localStorage.setItem('favorites', ''); showFavorites(document.getElementById('fav'));_paq.push(['trackEvent', 'Click', 'Use', 'ClearFavorites', 1]);" title="Click here to clear your favorites">&#10060;</div>
 		<div id="sun" onmouseover="this.style.cursor='pointer'" title="Click to change theme dark/bright" onclick="toggleTheme()">&#9728;</div>
+	
 	</div>
 	<div id="GRPD">
 		This site uses cookies to track traffic and site usage but does not store personal information. By clicking <span style="font-size:24pt"><a href="#" onclick="clickGRPD();">&#128077;</a></span>, you agree to these terms.

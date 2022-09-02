@@ -8,8 +8,5 @@ if ($pwd == __ADMIN_PASSWORD__ && $path != ""){
 		$mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
 		$mysqli->query("DELETE FROM records WHERE filename  = '".$path."';");
 		$mysqli->close();
-
-	
-
 }
 ?>
