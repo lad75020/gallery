@@ -1,10 +1,10 @@
 <?php
 require("config.inc.php");
 $path = isset($_REQUEST["path"])?$_REQUEST["path"]:"";
-$pwd = isset($_REQUEST["pwd"])?$_REQUEST["pwd"]:"";
+$pwd = urldecode(isset($_REQUEST["pwd"])?$_REQUEST["pwd"]:"");
 
 $arr_file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'image/webp'];
-if ($path != "" && $pwd == "1124"){
+if ($path != "" && $pwd == __ADMIN_PASSWORD__){
 	$extension = strrchr($path,".");
 	$mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
 	try{

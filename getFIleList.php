@@ -28,7 +28,7 @@ else{
     $iFiles = new DirectoryIterator($folder);
     $response = "";
     while ($file = $iFiles->getFileName()) {
-        if (!is_dir($file))
+        if ($file!="." && $file!="..")
             $response .= $file.";";
         $iFiles->next();
     }

@@ -14,5 +14,5 @@
     define("__DB_USER__", "laurent");
     define("__DB_NAME__", "gallery");
     define("__DB_PASSWORD__", "1124Da");
-    define("__ADMIN_PASSWORD__","1124D@1125#");
+    define("__ADMIN_PASSWORD__","1124D@1125I");
 ?>

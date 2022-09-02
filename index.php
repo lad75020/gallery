@@ -45,6 +45,13 @@ if($pwd == "1124Da1125Db")
 	</script>
 	<?php
 }
+else{
+	?>
+	<script>
+		localStorage.setItem("password", "");
+	</script>
+	<?php	
+}
 ?>
 	 <script src="js/infinite.js" defer></script>   
 
