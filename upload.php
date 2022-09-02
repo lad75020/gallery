@@ -1,4 +1,5 @@
 <?php
+require("config.inc.php");
 $arr_file_exts = ['png', 'gif', 'jpg', 'jpeg', 'webp'];
 $ext = strtolower(array_pop(explode('.',$_FILES['file']['name'])));
 
@@ -7,7 +8,7 @@ if (!(in_array($ext, $arr_file_exts)))
 
 $newFileName = time() . '_' . trim($_FILES['file']['name']);
 	
-move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $newFileName);
+move_uploaded_file($_FILES['file']['tmp_name'], __UPLOADS_FOLDER__ . "/" . $newFileName);
 
 return("File uploaded for moderation...".$newFileName);
 

@@ -1,11 +1,12 @@
 <?php
+require("config.inc.php");
 $filename = "";
 $like = "";
 if(isset($_REQUEST["filename"]))
     $filename = $_REQUEST["filename"];
 if(isset($_REQUEST["like"]))
     $like = $_REQUEST["like"];
-$mysqli = new mysqli("localhost", "laurent", "1124Da", "gallery");
+$mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
 $result = $mysqli->query("SELECT likes, dislikes FROM records WHERE filename = '".$filename."';");
 if($result->num_rows !=0){
     $row = $result->fetch_assoc();

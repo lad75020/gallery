@@ -1,5 +1,6 @@
 <?php
-	$files = scandir("uploads");
+require("config.inc.php");
+$files = scandir(__UPLOADS_FOLDER__);
 ?>
 <!doctype html>
 <html>

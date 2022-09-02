@@ -171,7 +171,7 @@ function showFavorites(oFavDiv) {
             var oImg = document.createElement("IMG");
             oImg.setAttribute("height","400px");
             oImg.setAttribute("onclick","overlayOn(this);");
-            oImg.setAttribute("src","XXX2/"+favorites[j]);
+            oImg.setAttribute("src","XXX/"+favorites[j]);
             oDiv.appendChild(oImg);
             document.getElementById("container").appendChild(oDiv);
         }
@@ -240,7 +240,7 @@ function putImages() {
                 oImg.setAttribute("height" , imageHeight);
                 //oImg.setAttribute("data-toggle", "tooltip");
                 oImg.setAttribute("title" , "Click on photo to enlarge.");
-                oImg.setAttribute("src", "XXX2/" + files[imageID]);
+                oImg.setAttribute("src", "XXX/" + files[imageID]);
                 oImg.setAttribute("onclick", "overlayOn(this);");
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID]))
                     oImg.style.borderColor="green";

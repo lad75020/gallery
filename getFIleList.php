@@ -1,6 +1,7 @@
 <?php
+require("config.inc.php");
 $isCached =false;
-$folder = "/var/www/";
+$folder = __FOLDERS_ROOT__;
 $apcukey = "";
 
 if(isset($_REQUEST["cached"]))

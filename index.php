@@ -20,6 +20,7 @@
 		var imageHeight = "";
 	</script>
 <?php 
+	require("config.inc.php");
     $is18= isset($_GET["is18"])? true:false;
 	$pwd= isset($_GET["laurent"])? $_GET["laurent"]:"";
 	$browser = get_browser($_SERVER['HTTP_USER_AGENT'],true);
@@ -40,7 +41,7 @@ if($pwd == "1124Da1125Db")
 {
 	?>
 	<script>
-		localStorage.setItem("password", "1124D@1125#");
+		localStorage.setItem("password", __ADMIN_PASSWORD__);
 	</script>
 	<?php
 }
@@ -53,7 +54,7 @@ if($pwd == "1124Da1125Db")
 	  _paq.push(['trackPageView']);
 	  _paq.push(['enableLinkTracking']);
 	    (function() {
-		        var u="//raspberrypi.dubertrand.corp/matomo/";
+		        var u="//<?php echo(__DOMAIN__); ?>/matomo/";
 			    _paq.push(['setTrackerUrl', u+'matomo.php']);
 			    _paq.push(['setSiteId', '1']);
 				  })();
