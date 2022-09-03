@@ -119,14 +119,25 @@ function addDislike(imageFileName) {
         localStorage.setItem("dislikes", imageFileName + ";");
     setRecord("no",imageFileName);
 }
-
+function hide(element){
+    element.style.display = "none";
+    element.style.visibility = "hidden";
+}
 function cleanAll() {
     var lengthChildren = document.getElementById("container").children.length;
     for (var i = 0; i < lengthChildren; i++) {
         document.getElementById("container").children[0].remove();
     }
 }
+function showDialogBox(sID, sText){
 
+    oDiv = document.createElement("DIV");
+    oDiv.setAttribute("class", "dialogBox");
+    oDiv.setAttribute("id", sID);
+    oDiv.setAttribute("onmouseover", "this.remove()");
+    oDiv.innerText = sText;
+    document.body.appendChild(oDiv);
+}
 function showAll() {
     document.getElementById('fav').style.display = 'block';
     document.getElementById('sun').style.display = 'block';
@@ -197,9 +208,12 @@ function  deleteFile(filename){
     xmlhttp5 = new XMLHttpRequest();
     xmlhttp5.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            alert("File deleted");
+            showDialogBox("1","File deleted successfully");
             return;
-    }
+        }
+        else if (this.readyState == 4 && this.status == 500){
+            showDialogBox("2","File not deleted.");
+        }
     };
     xmlhttp5.open("POST", "deleteFile.php",true);
     xmlhttp5.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
