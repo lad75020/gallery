@@ -219,6 +219,7 @@ function  deleteFile(filename){
     xmlhttp5.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xmlhttp5.send("filename="+filename+"&pwd="+localStorage.getItem("password"));
 }
+
 function putImages() {
 
     $('.toast').toast({ delay: 1500 });

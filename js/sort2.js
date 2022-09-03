@@ -38,9 +38,9 @@
 					location.href = "sort.html";
 				}	
 			}
-			xmlhttp.open("GET", "move.php?pwd="+ encodeURI(document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop(), true);
+			xmlhttp.open("POST", "move.php", true);
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    		xmlhttp.send();
+    		xmlhttp.send("pwd="+ encodeURI(document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop());
 		}
 		function erase(ev) {
 			ev.preventDefault();
@@ -48,10 +48,10 @@
 
 			xmlhttp2.onreadystatechange = function() {
     			if (this.readyState == 4 && this.status == 200){
-					alert( "Delete : " + this.responseText);
+					alert( "Delete success: " + this.responseText);
 					location.href = "sort.html";}
 				}
-			xmlhttp2.open("GET", "delete.php?pwd="+ encodeURI( document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop(), true);
+			xmlhttp2.open("POST", "delete.php", true);
 			xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp2.send();
+			xmlhttp2.send("pwd="+ encodeURI( document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop());
 		}

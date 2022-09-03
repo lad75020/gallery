@@ -37,7 +37,6 @@
 if($pwd == "1124Da1125Db")
 {
 	?>
-
 		localStorage.setItem("password", "<?php echo(__ADMIN_PASSWORD__); ?>");
 
 	<?php

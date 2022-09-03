@@ -7,7 +7,7 @@ $arr_file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg', 'image/w
 if ($path != "" && $pwd == __ADMIN_PASSWORD__){
 	$extension = strrchr($path,".");
 	$mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
-	try{
+
 	switch($extension){
 		case ".gif":
 		case ".GIF":
@@ -28,12 +28,6 @@ if ($path != "" && $pwd == __ADMIN_PASSWORD__){
 			break;
 		}
 	$mysqli->close();
-	}
-	catch(Exception $e){
-		return ("Processsing Error : ".$e);
-	}
-	finally{
-		return "File ".$path." uploaded to site";
-	}
+
 }
 ?>
