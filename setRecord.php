@@ -21,9 +21,9 @@ if($result->num_rows !=0){
 }
 else{
     if($like=="yes")
-        $mysqli->query(mysqli_real_escape_string("INSERT INTO records VALUES('".$filename."',1,0)"));
+        $mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('".$filename."',1,0)"));
     else if($like=="no")
-        $mysqli->query(mysqli_real_escape_string("INSERT INTO records VALUES('".$filename."',0,1)"));
+        $mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('".$filename."',0,1)"));
 }
 $mysqli->close();
 ?>
