@@ -34,7 +34,7 @@
 		imageHeight = "400px";
 
 <?php } 
-if($pwd == "MyPassword")
+if($pwd == __TEMP_PASSWORD__)
 {
 	?>
 		localStorage.setItem("password", "<?php echo(__ADMIN_PASSWORD__); ?>");
