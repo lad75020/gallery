@@ -19,12 +19,12 @@ if ($path != "" && $pwd == __ADMIN_PASSWORD__){
 		case ".PNG":
 			shell_exec("cwebp -q 100 -z 9 -resize 0 400 -lossless ".__UPLOADS_FULL_PATH__.$path." -o ".__SMALL_PIX_FULL_PATH__.$path.".webp");
 			unlink(__UPLOADS_FULL_PATH__.$path);
-			$mysqli->query("INSERT INTO records VALUES('{$path}.webp',0,0);");
+			$mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('{$path}.webp',0,0);"));
 			break;
 		case ".webp":
 		case ".WEBP":
 			shell_exec('mv '.__UPLOADS_FULL_PATH__.$path.' '.__SMALL_PIX_FULL_PATH__.$path);
-			$mysqli->query("INSERT INTO records VALUES('{$path}',0,0);");
+			$mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('{$path}',0,0);"));
 			break;
 		}
 	$mysqli->close();
