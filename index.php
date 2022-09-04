@@ -21,7 +21,7 @@
 <?php 
 	require("config.inc.php");
     $is18= isset($_GET["is18"])? true:false;
-	$pwd= isset($_GET["laurent"])? $_GET["laurent"]:"";
+	$pwd= isset($_GET["user"])? $_GET["user"]:"";
 	$browser = get_browser($_SERVER['HTTP_USER_AGENT'],true);
 	$isMobile = $browser["ismobiledevice"] == 1;
 	if( $isMobile) {?>
