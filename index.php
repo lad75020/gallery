@@ -34,7 +34,7 @@
 		imageHeight = "400px";
 
 <?php } 
-if($pwd == "1124Da1125Db")
+if($pwd == "MyPassword")
 {
 	?>
 		localStorage.setItem("password", "<?php echo(__ADMIN_PASSWORD__); ?>");
