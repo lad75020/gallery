@@ -1,10 +1,18 @@
 <?php
 require("config.inc.php");
 $path = isset($_REQUEST["path"])?$_REQUEST["path"]:"";
-$pwd = urldecode( isset($_REQUEST["pwd"])?$_REQUEST["pwd"]:"");
 
-if ($pwd == __ADMIN_PASSWORD__ && $path != ""){
-	shell_exec("rm ".__UPLOADS_FULL_PATH__.$path);
-
+if($_SERVER["HTTP_HOST"] == __ADMIN_HOST__){
+	if ($path != ""){
+		if(!unlink(__UPLOADS_FULL_PATH__.$path))
+		{
+			header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+		}
+	}
+	else {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 403 Wrong Password', true, 403);
+	}
 }
+else
+	header($_SERVER['SERVER_PROTOCOL'] . ' 403 Not allowed', true, 403);
 ?>
