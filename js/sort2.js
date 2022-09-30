@@ -30,28 +30,41 @@
 
 		function move(ev) {
 			ev.preventDefault();
-		    var xmlhttp = new XMLHttpRequest();
-
+			var xmlhttp = new XMLHttpRequest();
+		
 			xmlhttp.onreadystatechange = function() {
-    			if (this.readyState == 4 && this.status == 200){
+				if (this.readyState == 4 && this.status == 200){
 					alert("Move success! " + this.responseText);
 					location.href = "sort.html";
+				}
+				else if(this.readyState == 4 && this.status == 403){
+					alert( "Not Allowed " + this.responseText);
+				}
+				else if(this.readyState == 4 && this.status == 500){
+					alert( "System Error: " + this.responseText);
 				}	
 			}
 			xmlhttp.open("POST", "move.php", true);
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    		xmlhttp.send("pwd="+ encodeURI(document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop());
+			xmlhttp.send("path="+ev.dataTransfer.getData("text").split("/").pop());
 		}
 		function erase(ev) {
 			ev.preventDefault();
-		    var xmlhttp2 = new XMLHttpRequest();
-
+			var xmlhttp2 = new XMLHttpRequest();
+		
 			xmlhttp2.onreadystatechange = function() {
-    			if (this.readyState == 4 && this.status == 200){
+				if (this.readyState == 4 && this.status == 200){
 					alert( "Delete success: " + this.responseText);
 					location.href = "sort.html";}
+				else if(this.readyState == 4 && this.status == 403){
+					alert( "Not allowed " + this.responseText);
 				}
+				else if(this.readyState == 4 && this.status == 500){
+					alert( "System Error: " + this.responseText);
+				}		
+			}
+				
 			xmlhttp2.open("POST", "delete.php", true);
 			xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp2.send("pwd="+ encodeURI( document.getElementById("password").innerText) +"&path="+ev.dataTransfer.getData("text").split("/").pop());
+			xmlhttp2.send("path="+ev.dataTransfer.getData("text").split("/").pop());
 		}
