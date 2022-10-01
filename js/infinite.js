@@ -348,8 +348,13 @@ function ajax_file_upload(file_obj) {
             data: form_data,
             success: function(response) {
 				_paq.push(['trackEvent', 'Upload', 'Photo', 1, 1]);
+                showDialogBox("3", "File uploaded for moderation...");
                 document.getElementById("drop_file_zone").style.display = 'none';
                 $('#selectfile').val('');
+            },
+            error: function(response){
+                showDialogBox("3", "Wrong file type.");
+                document.getElementById("drop_file_zone").style.display = 'none';               
             }
         });
     }

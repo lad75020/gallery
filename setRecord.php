@@ -7,7 +7,7 @@ if(isset($_REQUEST["filename"]))
 if(isset($_REQUEST["like"]))
     $like = $_REQUEST["like"];
 $mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
-$result = $mysqli->query("SELECT likes, dislikes FROM records WHERE filename = '".$filename."';");
+$result = $mysqli->query(mysqli_real_escape_string($mysqli,"SELECT likes, dislikes FROM records WHERE filename = '".$filename."';"));
 if($result->num_rows !=0){
     $row = $result->fetch_assoc();
     $likes = $row["likes"];
@@ -17,7 +17,7 @@ if($result->num_rows !=0){
     if ($like == "no")
         $dislikes++;
     
-    $mysqli->query("UPDATE records SET likes = ".$likes." , dislikes = ".$dislikes." WHERE filename = '".$filename."';");
+    $mysqli->query(mysqli_real_escape_string($mysqli,"UPDATE records SET likes = ".$likes." , dislikes = ".$dislikes." WHERE filename = '".$filename."';"));
 }
 else{
     if($like=="yes")
