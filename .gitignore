@@ -7,3 +7,5 @@
 /sitemap.xml
 /config.inc.php
 /install.sh
+getTable.php
+showTable.html

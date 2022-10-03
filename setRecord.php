@@ -7,7 +7,7 @@ if(isset($_REQUEST["filename"]))
 if(isset($_REQUEST["like"]))
     $like = $_REQUEST["like"];
 $mysqli = new mysqli("localhost", __DB_USER__, __DB_PASSWORD__, __DB_NAME__);
-$result = $mysqli->query(mysqli_real_escape_string($mysqli,"SELECT likes, dislikes FROM records WHERE filename = '".$filename."';"));
+$result = $mysqli->query("SELECT likes, dislikes FROM records WHERE filename = '".$mysqli->real_escape_string($filename)."';");
 if($result->num_rows !=0){
     $row = $result->fetch_assoc();
     $likes = $row["likes"];
@@ -17,13 +17,13 @@ if($result->num_rows !=0){
     if ($like == "no")
         $dislikes++;
     
-    $mysqli->query(mysqli_real_escape_string($mysqli,"UPDATE records SET likes = ".$likes." , dislikes = ".$dislikes." WHERE filename = '".$filename."';"));
+    $mysqli->query("UPDATE records SET likes = ".$likes." , dislikes = ".$dislikes." WHERE filename = '".$mysqli->real_escape_string($filename)."';");
 }
 else{
     if($like=="yes")
-        $mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('".$filename."',1,0)"));
+        $mysqli->query("INSERT INTO records VALUES('".$mysqli->real_escape_string($filename)."',1,0)");
     else if($like=="no")
-        $mysqli->query(mysqli_real_escape_string($mysqli,"INSERT INTO records VALUES('".$filename."',0,1)"));
+        $mysqli->query("INSERT INTO records VALUES('".$mysqli->real_escape_string($filename)."',0,1)");
 }
 $mysqli->close();
 ?>
