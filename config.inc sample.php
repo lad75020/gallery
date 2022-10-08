@@ -15,6 +15,6 @@
     define("__DB_NAME__", "dbname"); //Database name
     define("__DB_PASSWORD__", "dbpassword"); //Database paswword
     define("__ADMIN_PASSWORD__","adminpassword"); //Password used by sort.html and showRecords.php
-    define("__TEMP_PASSWORD__","A4473D1610764155AEDFF4B72E1E0702}"); //Password for https://my.domain.com/index.php?user=A4473D1610764155AEDFF4B72E1E0702
-    define("__ADMIN_HOST__", "my.admin.domain.com");
+    define("__TEMP_PASSWORD__","A4473D1610764155AEDFF4B72E1E0702"); //Password for https://my.domain.com/index.php?user=A4473D1610764155AEDFF4B72E1E0702
+    define("__ADMIN_HOST__", "my.domain.com"); //Use to limit access to admin pages from a different domain
 ?>
