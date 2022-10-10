@@ -34,14 +34,14 @@
 				"name": "Launch Edge",
 				"request": "launch",
 				"type": "msedge",
-				"url": "http://raspberrypi.dubertrand.corp",
+				"url": "http://rpi.dubertrand.corp",
 				"webRoot": "/"
 			},
 			{
 				"name": "Listen for Xdebug",
 				"type": "php",
 				"request": "launch",
-				"hostname": "raspberrypi.dubertrand.corp",
+				"hostname": "rpi.dubertrand.corp",
 				"port": 9003
 			},
 			{
@@ -85,7 +85,7 @@
 				"runtimeArgs": [
 					"--remote-debugging-port=9222"
 				],
-				"url": "http://raspberrypi.dubertrand.corp",
+				"url": "http://rpi.dubertrand.corp",
 				"presentation": {
 					"hidden": true
 				}
@@ -98,7 +98,7 @@
 					"--headless",
 					"--remote-debugging-port=9222"
 				],
-				"url": "http://raspberrypi.dubertrand.corp",
+				"url": "http://rpi.dubertrand.corp",
 				"presentation": {
 					"hidden": true
 				}
@@ -107,7 +107,7 @@
 				"type": "vscode-edge-devtools.debug",
 				"name": "Open Edge DevTools",
 				"request": "attach",
-				"url": "http://raspberrypi.dubertrand.corp",
+				"url": "http://rpi.dubertrand.corp",
 				"presentation": {
 					"hidden": true
 				}
