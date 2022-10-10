@@ -19,7 +19,9 @@
 				"username": "root",
 				"password": "1124Da"
 			}
-		]
+		],
+		"git.enableSmartCommit": true,
+		"gitlens.plusFeatures.enabled": false
 	},
 	"launch": {
 		"configurations": [
