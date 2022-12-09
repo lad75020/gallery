@@ -11,6 +11,8 @@
 							oImg.setAttribute("id","drag"+i);
 							oImg.setAttribute("height","100px");
 							oImg.setAttribute("draggable","true");
+							oImg.setAttribute("onclick","moveFile(this,'"+files[i]+"');");
+							oImg.setAttribute("onmouseover","showImg(this)");
 							oImg.setAttribute("src","/uploads/"+files[i]);
 							//oImg.setAttribute("ondragstart","drag('event')");
 							document.getElementById("divSource").appendChild(oImg);
@@ -26,6 +28,42 @@
 		}
 		function drag(ev) {
 		  ev.dataTransfer.setData("text", ev.target.id);
+		}
+		function showImg(eImg){
+			let oImg = document.createElement("IMG");
+			oImg.setAttribute("src", eImg.src);
+			
+			if(document.getElementById("viewer")){
+				document.getElementById("viewer").replaceChild(oImg, document.getElementById("viewer").firstChild);
+				document.getElementById("viewer").style.display='block';
+			}
+			else{
+				let oDiv = document.createElement("DIV");
+				oDiv.setAttribute("style", "z-index:500;position:fixed;display:block;top:10px;left:640px;cursor:pointer");
+				oDiv.setAttribute("onclick","this.style.display='none'");
+				oDiv.setAttribute("id","viewer");
+				oDiv.appendChild(oImg);
+				document.body.appendChild(oDiv);
+			}       
+		}
+		function moveFile(obj,filename) {
+		
+			var xmlhttp = new XMLHttpRequest();
+		
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200){
+					obj.remove();
+				}
+				else if(this.readyState == 4 && this.status == 403){
+					alert( "Not Allowed " + this.responseText);
+				}
+				else if(this.readyState == 4 && this.status == 500){
+					alert( "System Error: " + this.responseText);
+				}	
+			}
+			xmlhttp.open("POST", "move.php", true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.send("path="+encodeURI(filename));
 		}
 
 		function move(ev) {

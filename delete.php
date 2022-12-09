@@ -10,7 +10,7 @@ if($_SERVER["HTTP_HOST"] == __ADMIN_HOST__){
 		}
 	}
 	else {
-		header($_SERVER['SERVER_PROTOCOL'] . ' 403 Wrong Password', true, 403);
+		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Missing Path', true, 403);
 	}
 }
 else
