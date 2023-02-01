@@ -20,9 +20,10 @@
 		var imageHeight = "";
 <?php 
 	require("config.inc.php");
+	require("php-browscap.php");
     $is18= isset($_GET["is18"])? true:false;
 	$pwd= isset($_GET["user"])? $_GET["user"]:"";
-	$browser = get_browser($_SERVER['HTTP_USER_AGENT'],true);
+	$browser = get_browser_cached($_SERVER['HTTP_USER_AGENT']);
 	$isMobile = $browser["ismobiledevice"] == 1;
 	if( $isMobile) {?>
 
