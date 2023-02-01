@@ -1,7 +1,5 @@
 <?php
 
-require ("cache.php");
-
 function _sortBrowscap($a,$b)
 {
 	$sa=strlen($a);
