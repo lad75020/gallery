@@ -106,11 +106,10 @@ img:hover {
     right: 10px;
     z-index: 100;
 }
-#plublogs {
-    position: fixed;
-    top: 80px;
-    left: 10px;
-    z-index: 100;
+.smallimage {
+    position:relative;
+    max-height: 100px;
+    max-width: 100px;
 }
 #gan{
     position: fixed;
@@ -245,8 +244,17 @@ img:hover {
 }
 .flagDelete {
     position:absolute;
-    right:80px;
+    left:20px;
     top:5px;
+    z-index:200;
+    font-size:24px;
+    font-weight:bolder;
+    cursor:pointer
+}
+.flagDeleteSmall {
+    position:absolute;
+    left:20px;
+    top:0px;
     z-index:200;
     font-size:24px;
     font-weight:bolder;
