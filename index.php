@@ -20,38 +20,30 @@
 		var imageHeight = "";
 <?php 
 	require("config.inc.php");
-	require("php-browscap.php");
+	require("browscap.php");
     $is18= isset($_GET["is18"])? true:false;
 	$pwd= isset($_GET["user"])? $_GET["user"]:"";
 	$browser = get_browser_cached($_SERVER['HTTP_USER_AGENT']);
 	$isMobile = $browser["ismobiledevice"] == 1;
 	if( $isMobile) {?>
-
-		imageHeight = "300px";isPhone = true;
-
+		imageHeight = "200px";isPhone = true;
 <?php } else { ?>
-
 		isPhone = false;
 		imageHeight = "400px";
-
 <?php } 
 if($pwd == __TEMP_PASSWORD__)
 {
 	?>
 		localStorage.setItem("password", "<?php echo(__ADMIN_PASSWORD__); ?>");
-
 	<?php
 }
 else{
 	?>
-
 		localStorage.setItem("password", "");
-
 	<?php	
 }
 ?>	</script>
 	 <script src="js/infinite.js" defer></script>   
-
 <!-- Matomo -->
 		<script type="text/javascript">
 		  var _paq = window._paq = window._paq || [];
@@ -65,11 +57,10 @@ else{
 	  </script>
 <!-- End Matomo Code -->
 </head>
-
 <body onload="getImageFileList();getVideoFileList();if(localStorage.getItem('theme') =='dark') document.body.style.backgroundColor = 'black';if(localStorage.getItem('theme') =='bright') document.body.style.backgroundColor = 'white';drawOn = setInterval(scrolling, 250);if(localStorage.getItem('is18')!='1') document.getElementById('btnOpen').click(); else {showAll();document.getElementById('container').style.visibility='visible';}">
 
 	<div id="videolink" title="Watch videos" style="text-align:center;color:red;font-size:36pt;font-weight:bold;display:none">
-		<a href="#" onclick="displayVideos();"> New ! Videos</a>
+		<a href="#" onclick="displayVideos();">Videos</a>
 	</div>
 
     <div class="modal fade" id="myModal">
