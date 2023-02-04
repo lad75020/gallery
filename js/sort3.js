@@ -16,7 +16,7 @@ function drawPix(){
                     oImg.setAttribute("onmouseover","showImg(this)");
 					oImg.setAttribute("src","/uploads/"+files[i]);
 					var oDiv = document.createElement("DIV");
-					oDiv.setAttribute("class" , "smallimage");
+					oDiv.setAttribute("class" , "image");
 					oDiv.setAttribute("id" , "span"+i);
 					var oX = document.createElement("DIV");
 					oX.setAttribute("class","flagDelete");
