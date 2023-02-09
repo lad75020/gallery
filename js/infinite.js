@@ -39,20 +39,22 @@ xmlhttp2.send();
 }
 
 function getVideoFileList(){
-xmlhttp3 = new XMLHttpRequest();
-xmlhttp3.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        videos = this.responseText.replace("\r\n", "").split(";");
-        let i = 0;
-        addOption(document.getElementById("movie"), "Select a movie...", "BLANK");
-        addOption(document.getElementById("movie"), "Close Video Player", "CLOSE_NOW");
-        while (i < videos.length){
-            addOption(document.getElementById("movie"),videos[i],encodeURI(videos[i++]));
+    const xmlhttp3 = new XMLHttpRequest();
+    xmlhttp3.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            const videos = this.responseText.split(";");
+            const movieSelect = document.getElementById("movie");
+    
+            addOption(movieSelect, "Select a movie...", "BLANK");
+            addOption(movieSelect, "Close Video Player", "CLOSE_NOW");
+    
+            videos.forEach(video => {
+                addOption(movieSelect, video, encodeURI(video));
+            });
         }
-    }
-};
-xmlhttp3.open("GET", "getFIleList.php?cached=no&folder=videos&apcukey=viddir",true);
-xmlhttp3.send();
+    };
+    xmlhttp3.open("GET", "getFIleList.php?cached=no&folder=videos&apcukey=viddir",true);
+    xmlhttp3.send();
 }
 function setRecord(like, fileName){
     xmlhttp4 = new XMLHttpRequest();
