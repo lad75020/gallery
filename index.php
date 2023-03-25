@@ -30,7 +30,17 @@
 <?php } else { ?>
 		isPhone = false;
 		imageHeight = "400px";
+		const useDB =
 <?php } 
+if (__USE_FILE_DB__){
+	?>
+	 true;
+<?php
+}else{
+	?>
+	 false;
+<?php	
+}
 if($pwd == __TEMP_PASSWORD__)
 {
 	?>

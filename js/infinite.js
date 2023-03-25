@@ -1,13 +1,13 @@
-var imageLoad = 64;
-var imageID = 0;
+const imageLoad = 64;
+let imageID = 0;
 var maxImages = 256;
-var firstImageID = 0;
+let firstImageID = 0;
 var offset = 0;
 var files = new Array();
 var videos = new Array();
 var favMode = false;
 var drawOn;
-var imageHeight = "400px";
+imageHeight = "400px";
 var country = "";
 var thresholdImages = 100;
 var scrollingOn =false;
@@ -29,12 +29,18 @@ function getImageFileList(){
 xmlhttp2 = new XMLHttpRequest();
 xmlhttp2.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        files = shuffle(this.responseText.replace("\r\n", "").split(";"));
+        if(!useDB)
+            files = shuffle(this.responseText.replace("\r\n", "").split(";"));
+        else
+            files = shuffle(JSON.parse(this.responseText));
         document.getElementById("nbPictures").innerText = files.length;
         document.getElementById("progressBar").setAttribute("max", files.length);
     }
 };
-xmlhttp2.open("GET", "getFIleList.php?cached=yes&folder=XXX&apcukey=imgdir",true);
+if (!useDB)
+    xmlhttp2.open("GET", "getFIleList.php?cached=yes&folder=XXX&apcukey=imgdir",true);
+else
+    xmlhttp2.open("GET", "getFIleList.php?cached=no&apcukey=imgdir&usedb=yes",true);
 xmlhttp2.send();
 }
 
@@ -65,7 +71,7 @@ function setRecord(like, fileName){
     };
     xmlhttp4.open("POST", "setRecord.php",true);
     xmlhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xmlhttp4.send("like="+like+"&filename="+fileName);
+    xmlhttp4.send(`like=${like}&filename=${fileName}`);
 }
 function toggleTheme(){
     if (localStorage.getItem("theme")=="dark"){
@@ -116,9 +122,9 @@ function addFavorite(image) {
 function addDislike(imageFileName) {
 
     if (localStorage.getItem("dislikes") != null)
-        localStorage.setItem("dislikes", localStorage.getItem("dislikes") + imageFileName + ";");
+        localStorage.setItem("dislikes", `${localStorage.getItem("dislikes") + imageFileName};`);
     else
-        localStorage.setItem("dislikes", imageFileName + ";");
+        localStorage.setItem("dislikes", `${imageFileName};`);
     setRecord("no",imageFileName);
 }
 function hide(element){
@@ -184,7 +190,7 @@ function showFavorites(oFavDiv) {
             var oImg = document.createElement("IMG");
             oImg.setAttribute("height","400px");
             oImg.setAttribute("onclick","overlayOn(this);");
-            oImg.setAttribute("src","XXX/"+favorites[j]);
+            oImg.setAttribute("src",`XXX/${favorites[j]}`);
             oDiv.appendChild(oImg);
             document.getElementById("container").appendChild(oDiv);
         }
@@ -219,7 +225,7 @@ function  deleteFile(filename){
     };
     xmlhttp5.open("POST", "deleteFile.php",true);
     xmlhttp5.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xmlhttp5.send("filename="+filename+"&pwd="+localStorage.getItem("password"));
+    xmlhttp5.send(`filename=${filename}&pwd=${localStorage.getItem("password")}`);
 }
 
 function putImages() {
@@ -240,7 +246,7 @@ function putImages() {
                 oDivX = document.createElement("div");
                 oDivHeart = document.createElement("div");
                 
-                oDivX.setAttribute("onclick", "document.getElementById('ID"+imageID+"').firstChild.style.borderColor='red';setTimeout(hidePix,1000,"+ imageID +");addDislike('"+ files[imageID] +"');");
+                oDivX.setAttribute("onclick", `document.getElementById('ID${imageID}').firstChild.style.borderColor='red';setTimeout(hidePix,1000,${imageID});addDislike('${files[imageID]}');`);
                 oDivX.setAttribute("class","closeX");
                 oDivX.setAttribute("title","Click on X to definitely hide this photo.");
                 oDivX.innerHTML = "X";
@@ -257,7 +263,10 @@ function putImages() {
                 oImg.setAttribute("height" , imageHeight);
                 //oImg.setAttribute("data-toggle", "tooltip");
                 oImg.setAttribute("title" , "Click on photo to enlarge.");
-                oImg.setAttribute("src", "XXX/" + files[imageID]);
+                if (!useDB)
+                    oImg.setAttribute("src", "XXX/" + files[imageID]);
+                else
+                    oImg.setAttribute("src", "image/w=0,h=600,q=100/" + files[imageID]);
                 oImg.setAttribute("onclick", "overlayOn(this);");
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID]))
                     oImg.style.borderColor="green";
@@ -271,13 +280,13 @@ function putImages() {
                     oDivDelete = document.createElement("div");
                     oDivDelete.setAttribute("class","flagDelete");
                     oDivDelete.setAttribute("title","Click to delete on disk.");
-                    oDivDelete.setAttribute("onclick", "document.getElementById('ID"+imageID+"').firstChild.style.borderColor='red';setTimeout(hidePix,1000,"+ imageID +");deleteFile(document.getElementById('ID"+imageID+"').firstChild.src.split('/').pop());");
+                    oDivDelete.setAttribute("onclick", `document.getElementById('ID${imageID}').firstChild.style.borderColor='red';setTimeout(hidePix,1000,${imageID});deleteFile(document.getElementById('ID${imageID}').firstChild.src.split('/').pop());`);
                     oDivDelete.innerHTML = "&#128681";
                     oDiv.appendChild(oDivDelete);
                 }
                 document.getElementById("container").appendChild(oDiv);
                 if (localStorage.getItem("favorites").split(";").includes(files[imageID])){
-                    document.getElementById("ID"+imageID).firstChild.style.borderColor="green";
+                    document.getElementById(`ID${imageID}`).firstChild.style.borderColor="green";
                 }
             }
             imageID++;
