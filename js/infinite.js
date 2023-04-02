@@ -1,20 +1,13 @@
 const imageLoad = 64;
 let imageID = 0;
-var maxImages = 256;
-let firstImageID = 0;
 var offset = 0;
 var files = new Array();
-var videos = new Array();
 var favMode = false;
 var drawOn;
 imageHeight = "400px";
-var country = "";
 var thresholdImages = 100;
 var scrollingOn =false;
-var error404=0;
-var success200 = 0;
 var isPhone=0;
-var whereIs="";
 
 if (localStorage.getItem("favorites") == null)
     localStorage.setItem("favorites", "");
