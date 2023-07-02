@@ -125,8 +125,8 @@ function hide(element){
     element.style.visibility = "hidden";
 }
 function cleanAll() {
-    var lengthChildren = document.getElementById("container").children.length;
-    for (var i = 0; i < lengthChildren; i++) {
+    const lengthChildren = document.getElementById("container").children.length;
+    for (let i = 0; i < lengthChildren; i++) {
         document.getElementById("container").children[0].remove();
     }
 }
@@ -310,8 +310,8 @@ function scrolling() {
 }
 
 function overlayOn(image) {
-    var pixHeight = document.documentElement.clientHeight - 20;
-    var oImg = document.createElement("IMG");
+    const pixHeight = document.documentElement.clientHeight - 20;
+    let oImg = document.createElement("IMG");
     oImg.setAttribute("width","auto");
     oImg.setAttribute("height",pixHeight);
     oImg.setAttribute("src",image.src)
@@ -342,7 +342,7 @@ function file_explorer() {
 
 function ajax_file_upload(file_obj) {
     if (file_obj != undefined) {
-        var form_data = new FormData();
+        let form_data = new FormData();
         form_data.append('file', file_obj);
         $.ajax({
             type: 'POST',
